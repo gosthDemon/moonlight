@@ -21,4 +21,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/MyURL', [ClassController::class, 'MyMethod'])->name('MyName')->middleware('isAuthenticate:role1,role2');
+
 require __DIR__.'/auth.php';

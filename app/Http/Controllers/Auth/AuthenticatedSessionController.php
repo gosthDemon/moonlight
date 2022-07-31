@@ -32,7 +32,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $role = $request->user()->role;
+
+        $role = $request->user()->role;
+        switch ($role) {
+            case 'Admin':
+                return redirect(route('/dashboard'));
+                break;
+            case 'Docente':
+                return redirect(route('/myCourses'));
+                break;
+            case 'Tutor':
+                return redirect(route('/selectSon'));
+                break;
+            case 'Alumno':
+                return redirect(route('/myRankings'));
+                break;
+        }
     }
 
     /**
@@ -52,3 +68,4 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 }
+
