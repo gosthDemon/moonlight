@@ -21,6 +21,7 @@ class isAuthenticate
                 return $next($request);
             }
         }
+        ;
         return redirect('/error-404');
     }
 }

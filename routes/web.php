@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/MyURL', [ClassController::class, 'MyMethod'])->name('MyName')->middleware('isAuthenticate:role1,role2');
+
+//Docentes
+Route::get('/Mis Cursos', [DocenteController::class, 'MyCourses'])->name('/Mis Cursos')->middleware('isAuthenticate:Docente');
 
 require __DIR__.'/auth.php';
