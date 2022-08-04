@@ -10,7 +10,75 @@
 </head>
 <body>
     <section class="menu-lateral" id="menu_lateral">
-        
+        <nav class="nav">
+            <ul class="list">
+                <li class="list__item">
+                    <div class="list__button">
+                        <img src="{{URL::asset('img/iconos/dashboard.svg')}}" class="list__img">
+                        <a href="#" class="nav__link">Inicio</a>
+                    </div>
+                </li>
+    
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <img src="{{URL::asset('img/iconos/docs.svg')}}" class="list__img">
+                        <a href="#" class="nav__link">Servicios</a>
+                        <img src="{{URL::asset('img/iconos/arrow.svg')}}" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Estoy dentro</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Estoy dentro</a>
+                        </li>
+                    </ul>
+    
+                </li>
+    
+    
+                <li class="list__item">
+                    <div class="list__button">
+                        <img src="{{URL::asset('img/iconos/stats.svg')}}" class="list__img">
+                        <a href="#" class="nav__link">Estadisticas</a>
+                    </div>
+                </li>
+    
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <img src="{{URL::asset('img/iconos/bell.svg')}}" class="list__img">
+                        <a href="#" class="nav__link">Notificaciones</a>
+                        <img src="{{URL::asset('img/iconos/arrow.svg')}}" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Estoy dentro</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Estoy dentro</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Estoy dentro</a>
+                        </li>
+                    </ul>
+    
+                </li>
+    
+    
+                <li class="list__item">
+                    <div class="list__button">
+                        <img src="{{URL::asset('img/iconos/message.svg')}}" class="list__img">
+                        <a href="#" class="nav__link">Contacto</a>
+                    </div>
+                </li>
+    
+            </ul>
+        </nav>
     </section>
     <section class="container-body" id="container_body">
         <div class="header">
