@@ -17,8 +17,10 @@ class isAuthenticate
     public function handle(Request $request, Closure $next, ...$roles)
     {
         for ($i=0; $i < count($roles); $i++) { 
-            if($request->user()->role == $roles[$i]){
-                return $next($request);
+            if($request->user()){
+                if($request->user()->role == $roles[$i]){
+                    return $next($request);
+                }
             }
         }
         ;

@@ -24,6 +24,6 @@ Route::get('/dashboard', function () {
 
 
 //Docentes
-Route::get('/Mis Cursos', [DocenteController::class, 'MyCourses'])->name('/Mis Cursos')->middleware('isAuthenticate:Docente');
+Route::get('/Mis_Cursos', [DocenteController::class, 'MyCourses'])->name('/Mis Cursos')->middleware('isAuthenticate:Docente');
 
 require __DIR__.'/auth.php';
