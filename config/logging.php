@@ -64,7 +64,43 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
+        // Logs Exceptions
+        'validation' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/validation.log'),
+            'level' => 'warning',
+        ],
 
+        'auth' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/auth.log'),
+            'level' => 'warning',
+        ],
+
+        'authorization' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/authorization.log'),
+            'level' => 'warning',
+        ],
+
+        'model_not_found' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/model_not_found.log'),
+            'level' => 'warning',
+        ],
+
+        'query' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/query.log'),
+            'level' => 'error',
+        ],
+
+        'generic' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/generic.log'),
+            'level' => 'error',
+        ],
+        //End Logs Exceptions
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -89,7 +125,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],

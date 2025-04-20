@@ -2,7 +2,12 @@
 
 namespace App\Helpers\Logs;
 
-use \Illuminate\Support\Facades\Log as DefaultLog;
+use App\Enums\Response\Type;
+use App\Enums\Types\ExceptionType;
+use App\Helpers\Tools\Tools;
+use \Illuminate\Support\Facades\Log as LaravelLog;
+use Throwable;
+use Exception;
 
 class Log
 {
@@ -23,10 +28,10 @@ class Log
      * - Message of the exception.
      * - Inner exception message (if available).
      */
-    public static function error(string $message, array|\Exception $exception = [])
+    public static function log(string $message, array|Exception|Throwable|null $exception = [], Type $type = Type::ERROR): void
     {
         // Initialize variables to hold exception data
-        $exception_type =
+        $channel = ExceptionType::getChannel($exception);
 
         $archivo = "";
         $funcion = "";
@@ -35,9 +40,9 @@ class Log
         $messageException = "";
 
         // Check if the provided argument is an exception
-        if ($exception instanceof \Exception) {
+        if ($exception instanceof \Throwable) {
             $archivo = $exception->getFile();
-            $funcion = $exception->getTrace()[0]['function'] ?? '';  // Retrieve function name from trace
+            $funcion = $exception->getTrace()[0]['function'] ?? '';
             $line = $exception->getLine();
             $trace = explode("\n", $exception->getTraceAsString());
             // Filter out the 'vendor' stack trace lines to avoid unnecessary noise
@@ -71,22 +76,9 @@ class Log
             json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         );
 
-        // Log the error message using Laravel's default logging system
-        DefaultLog::error($logEntry);
-    }
-    private static function getExceptionType(array|\Exception $exception = []): string
-    {
-        if ($exception instanceof \Exception) {
-            $class = get_class($exception);
-            if ($class === \Exception::class) {
-                return 'GenericException';
-            }
 
-            return class_basename($class);
-        } elseif (is_array($exception) && isset($exception['type'])) {
-            return $exception['type'];
-        }
-
-        return 'UnknownType';
+        $logMethod = ($type == Type::ERROR) ? 'error' : 'warning';
+        $logChannel = Tools::isChannelAvailable($channel) ? $channel : null;
+        LaravelLog::channel($logChannel)->{$logMethod}($logEntry);
     }
 }

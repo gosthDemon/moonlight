@@ -4,8 +4,10 @@ namespace App\Helpers\Responses;
 
 use App\Enums\Response\Type;
 use App\Enums\Response\Status;
-use Exception;
+use App\Helpers\Logs\Log;
 use Illuminate\Http\JsonResponse;
+use Throwable;
+use Exception;
 
 class TransactionResponse
 {
@@ -18,8 +20,11 @@ class TransactionResponse
     public array $data = [];
     public array $errors = [];
 
-    private function __construct(Status $status, Type $type, string $message, array|Exception|null $data = [], bool $loggin = true)
+    private function __construct(Status $status, Type $type, string $message, array|Exception|Throwable|null $data = [], bool $loggin = true)
     {
+        if (($type == Type::ERROR || $type == Type::WARNING) && $loggin) {
+            Log::log($message, $data, $type);
+        }
         $this->status = $status ?? Status::InternalServerError;
         $this->type = $type;
         $this->message = $message;
@@ -30,7 +35,7 @@ class TransactionResponse
         if ($this->type == Type::OK || $this->type == Type::INFO) {
             $this->data = $data;
         } else {
-            if ($data instanceof Exception) {
+            if ($data instanceof Throwable) {
                 $this->errors = $this->data instanceof \Illuminate\Validation\ValidationException ? $this->data->errors() : [];
                 if (empty($this->errors)) {
                     $this->errors["message"] = $data->getMessage();
@@ -90,7 +95,7 @@ class TransactionResponse
         return new self($status, Type::WARNING, $message, $data, $loggin);
     }
 
-    public static function ERROR(Status $status, string $message, array|Exception $exception, bool $loggin = true): TransactionResponse
+    public static function ERROR(Status $status, string $message, array|Exception|Throwable|null $exception, bool $loggin = true): TransactionResponse
     {
         if (is_array($exception) && config("app.debug")) {
             $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);

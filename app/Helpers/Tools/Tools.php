@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Tools;
 
+use Illuminate\Support\Facades\Config;
 
 class Tools
 {
@@ -20,20 +21,16 @@ class Tools
         $text = str_replace(' ', '-', trim($text));
         return preg_replace('/-+/', '-', $text);
     }
-    
-    public static function getExceptionType(array|\Exception $exception = []): string
+
+    /**
+     * Checks if a log channel is configured and available in the config.
+     *
+     * @param string $channel The name of the channel to check.
+     * @return bool True if the channel is available, false otherwise.
+     */
+    public static function isChannelAvailable(string $channel): bool
     {
-        if ($exception instanceof \Exception) {
-            $class = get_class($exception);
-            if ($class === \Exception::class) {
-                return 'GenericException';
-            }
-
-            return class_basename($class);
-        } elseif (is_array($exception) && isset($exception['type'])) {
-            return $exception['type'];
-        }
-
-        return 'UnknownType';
+        // Check if the channel exists in the logging configuration
+        return array_key_exists($channel, Config::get('logging.channels'));
     }
 }
