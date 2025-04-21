@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Moonlight</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        />
+    </head>
+    <style>
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-button {
+            padding: 10px 20px;
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dropdown-button:hover {
+            background-color: #333;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 120%;
+            left: 0;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            padding: 10px 0;
+            width: 180px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            transition: 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn.active {
+            background-color: #0056b3;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+    <body>
+        <section>
+            <h1>UI Kit</h1>
+            <p>Welcome to the UI Kit page!</p>
+            <p>This is a simple example of a UI kit page.</p>
+            <p>Feel free to customize it as per your requirements.</p>
+            <p>Happy coding!</p>
+            <p>
+                For more information, visit the
+                <a href="https://murphyisdev.com">Moonlight documentation</a>.
+            </p>
+        </section>
+        <section id="buttons">
+            <h2>Buttons</h2>
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-outline">Outline Button</button>
+            <button class="btn btn-gosth">Success Button</button>
+            <button class="btn btn-link">Danger Button</button>
+            <button class="btn btn-primary-small">Small Button</button>
+            <button class="btn btn-primary-big">Small Button</button>
+            <button class="btn btn-primary disabled">Small Button</button>
+            <button class="btn btn-primary">Button with Icon</button>
+            <button class="btn btn-primary loading">Button with Icon</button>
+        </section>
+        <section id="modals">
+            <h2>Modals</h2>
+            <button class="btn btn-primary">Open Modal</button>
+            <button class="btn btn-outline">Timeout Modal</button>
+        </section>
+        <section id="modals">
+            <h2>Alerts and Notifications</h2>
+            <div class="alert warning">
+                <i class="fas fa-info"></i>
+                <div class="text">
+                    <div class="title">Información</div>
+                    <div class="description">
+                        Este es un mensaje informativo para el usuario.
+                    </div>
+                </div>
+            </div>
+            <div class="alert error">
+                <i class="fas fa-info"></i>
+                <div class="text">
+                    <div class="title">Error</div>
+                    <div class="description">
+                        Ha ocurrido un error al procesar tu solicitud.
+                    </div>
+                </div>
+            </div>
+            <div class="alert success">
+                <i class="fas fa-check"></i>
+                <div class="text">
+                    <div class="title">Éxito</div>
+                    <div class="description">
+                        Tu operación se ha completado con éxito.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="forms">
+            <h2>Forms</h2>
+            <form action="#" method="POST">
+                <!-- Text Input -->
+                <label for="textInput">Text Input:</label>
+                <input
+                    type="text"
+                    id="textInput"
+                    name="textInput"
+                    placeholder="Enter text here"
+                />
+
+                <!-- Number Input -->
+                <label for="numberInput">Number Input:</label>
+                <input
+                    type="number"
+                    id="numberInput"
+                    name="numberInput"
+                    placeholder="Enter a number"
+                />
+
+                <!-- Radio Buttons -->
+                <fieldset>
+                    <legend>Radio Buttons:</legend>
+                    <label>
+                        <input
+                            type="radio"
+                            name="radioOption"
+                            value="option1"
+                        />
+                        Option 1
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="radioOption"
+                            value="option2"
+                        />
+                        Option 2
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="radioOption"
+                            value="option3"
+                        />
+                        Option 3
+                    </label>
+                </fieldset>
+
+                <!-- Checkboxes -->
+                <fieldset>
+                    <legend>Checkboxes:</legend>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="checkboxOption"
+                            value="option1"
+                        />
+                        Option 1
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="checkboxOption"
+                            value="option2"
+                        />
+                        Option 2
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="checkboxOption"
+                            value="option3"
+                        />
+                        Option 3
+                    </label>
+                </fieldset>
+
+                <!-- Dropdown -->
+                <label for="dropdown">Select an Option:</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+
+                <!-- Text Area -->
+                <label for="textArea">Text Area:</label>
+                <textarea
+                    id="textArea"
+                    name="textArea"
+                    rows="4"
+                    placeholder="Enter your message"
+                ></textarea>
+
+                <!-- Date Input -->
+                <label for="dateInput">Date Input:</label>
+                <input type="date" id="dateInput" name="dateInput" />
+
+                <!-- File Input -->
+                <label for="fileInput">File Input:</label>
+                <input type="file" id="fileInput" name="fileInput" />
+
+                <!-- Email Input -->
+                <label for="emailInput">Email Input:</label>
+                <input
+                    type="email"
+                    id="emailInput"
+                    name="emailInput"
+                    placeholder="Enter your email"
+                />
+
+                <!-- Password Input -->
+                <label for="passwordInput">Password Input:</label>
+                <input
+                    type="password"
+                    id="passwordInput"
+                    name="passwordInput"
+                    placeholder="Enter your password"
+                />
+
+                <!-- Search Input -->
+                <label for="searchInput">Search Input:</label>
+                <input
+                    type="search"
+                    id="searchInput"
+                    name="searchInput"
+                    placeholder="Search here"
+                />
+
+                <!-- Tel Input -->
+                <label for="telInput">Telephone Input:</label>
+                <input
+                    type="tel"
+                    id="telInput"
+                    name="telInput"
+                    placeholder="Enter your phone number"
+                />
+
+                <!-- URL Input -->
+                <label for="urlInput">URL Input:</label>
+                <input
+                    type="url"
+                    id="urlInput"
+                    name="urlInput"
+                    placeholder="Enter a URL"
+                />
+
+                <!-- Range Input -->
+                <label for="rangeInput">Range Input:</label>
+                <input
+                    type="range"
+                    id="rangeInput"
+                    name="rangeInput"
+                    min="0"
+                    max="100"
+                />
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+        <section id="dropdown">
+            <div class="dropdown-container">
+                <button class="dropdown-button" id="dropdownToggle">
+                    Opciones
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#">Opción 1</a>
+                    <a href="#">Opción 2</a>
+                    <a href="#">Opción 3</a>
+                </div>
+            </div>
+        </section>
+        <section id="typographie">
+            <p class="title">Titles</p>
+            <h1>H1 Title</h1>
+            <h2>H2 Title</h2>
+            <h3>H3 Title</h3>
+            <h4>H4 Title</h4>
+            <h5>H5 Title</h5>
+            <h6>H6 Title</h6>
+            <p class="subtitle">Subtitle</p>
+            <p class="big-subtitle">Big Subtitle</p>
+            <p class="medium-subtitle">Medium Subtitle</p>
+            <p class="subtitle">Standar Subtitle</p>
+            <p class="title">Párrafos</p>
+            <p class="paragraph">
+                This is an standard paragraph. Lorem, ipsum dolor sit amet
+                consectetur adipisicing elit. Quod vero est, non aliquid enim
+                laborum repellat optio molestiae ut deleniti magnam dolorum ipsa
+                quidem quaerat. Nam, vitae. Nisi, libero voluptatibus.
+            </p>
+            <p class="small-paragraph">
+                This is a small paragraph. Lorem ipsum dolor sit, amet
+                consectetur adipisicing elit. Sunt voluptas omnis velit
+                doloremque libero architecto neque quae tenetur, necessitatibus
+                nulla commodi et qui. Possimus mollitia pariatur voluptates
+                consequatur distinctio rerum.
+            </p>
+            <p class="extra-small-paragraph">
+                This is an extra small paragraph. Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Quisquam, voluptatibus. Quod vero
+                est, non aliquid enim laborum repellat optio molestiae ut
+                deleniti magnam dolorum ipsa quidem quaerat. Nam, vitae. Nisi,
+                libero voluptatibus.
+            </p>
+        </section>
+        <section id="badges">
+            <h2>Badges</h2>
+            <span class="badge badge-primary">Default</span>
+            <span class="badge badge-outline">Outline</span>
+            <span class="badge badge-secondary">Secondary</span>
+            <span class="badge badge-danger">Danger</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-info">Info</span>
+        </section>
+        <section id="tables">
+            <h2>Tables</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Juan Pérez</td>
+                        <td>juan@ejemplo.com</td>
+                        <td>Admin</td>
+                        <td>Activo</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>María López</td>
+                        <td>maria@ejemplo.com</td>
+                        <td>Editor</td>
+                        <td>Activo</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>Carlos Rodríguez</td>
+                        <td>carlos@ejemplo.com</td>
+                        <td>Usuario</td>
+                        <td>Pendiente</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="cards">
+            <div class="card">
+                <h3>Basic Card</h3>
+                <p class="small-paragraph">Card description</p>
+                <p class="paragraph">This is for a Basic card the content</p>
+                <a href="" class="btn btn-primary">Action</a>
+            </div>
+            <div class="card card-primary">
+                <div class="header">
+                    <h3>Basic Card</h3>
+                    <p class="small-paragraph">Card description</p>
+                </div>
+                header
+                <p class="paragraph">This is for a Basic card the content</p>
+                <a href="" class="btn btn-outline">Action</a>
+            </div>
+            <div class="card card-outline">
+                <div class="header">
+                    <h3 color="">Basic Card</h3>
+                    <p class="small-paragraph">Card description</p>
+                </div>
+                <p class="paragraph">This is for a Basic card the content</p>
+                <a href="" class="btn btn-outline">Action</a>
+            </div>
+            <br />
+            <div class="tab">
+                <div class="buttons">
+                    <div class="btn active" data-tab="Notas">Notas</div>
+                    <div class="btn" data-tab="Asistencia">Asistencia</div>
+                    <div class="btn" data-tab="Contacto">
+                        Contacto de emergencia
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="tab-content active" id="Notas">
+                        <h3>Notas</h3>
+                        <p>Notas del alumno</p>
+                    </div>
+                    <div class="tab-content" id="Asistencia">
+                        <h3>Asistencia</h3>
+                        <p>Asistencia del alumno</p>
+                    </div>
+                    <div class="tab-content" id="Contacto">
+                        <h3>Contacto de emergencia</h3>
+                        <p>Contacto de emergencia del alumno</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            const toggle = document.getElementById("dropdownToggle");
+            const menu = document.getElementById("dropdownMenu");
+
+            toggle.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
+
+            // Cierra el menú al hacer clic fuera
+            document.addEventListener("click", (e) => {
+                if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove("show");
+                }
+            });
+        </script>
+        <script>
+            const buttons = document.querySelectorAll(".btn");
+            const contents = document.querySelectorAll(".tab-content");
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const tabId = btn.getAttribute("data-tab");
+
+                    // Remove "active" from all buttons and contents
+                    buttons.forEach((b) => b.classList.remove("active"));
+                    contents.forEach((c) => c.classList.remove("active"));
+
+                    // Add "active" to clicked button and corresponding content
+                    btn.classList.add("active");
+                    document.getElementById(tabId).classList.add("active");
+                });
+            });
+        </script>
+    </body>
+</html>
